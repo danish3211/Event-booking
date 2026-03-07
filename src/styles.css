@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #8A2BE2;
+  --color-secondary: #2A1F3D;
+  --color-text: #050014;
+  --color-vivid: #7F5AF0;
+  --color-background: #FFFFFF;
+  --color-surface: #B3B3B3;
+}
+
+body {
+  @apply m-0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes scroll-down {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-scroll-up {
+  animation: scroll-up 20s linear infinite;
+}
+
+.animate-scroll-down {
+  animation: scroll-down 20s linear infinite;
+}
+
+/* Pause animation on hover */
+.group:hover .animate-scroll-up,
+.group:hover .animate-scroll-down {
+  animation-play-state: paused;
+}
