@@ -10,7 +10,7 @@ export default function ArtistTour() {
 
     return (
         <section className="py-12">
-            <p className="text-3xl font-semibold mb-8 text-text">Artists on Tour in {selectedCity}</p>
+            <p className="text-3xl font-semibold mb-8 text-background">Artists on Tour in {selectedCity}</p>
             <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-6 gap-6">
                 {ARTISTS.map((artist) => (
                     <ProfileCard

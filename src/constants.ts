@@ -1,3 +1,5 @@
+import type { IEvent } from "./interfaces/Event.interface";
+
 export interface Category {
     name: string;
     icon: string;
@@ -27,95 +29,214 @@ export const CATEGORY_CONFIG = [
         description: "Business events offer powerful spaces to network and grow in the corporate world.",
     },
     {
-        slug: "music",      
+        slug: "music",
         title: "Music Events",
         image: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80&w=1200",
         description: "Explore the best music events in the city today and experience the diverse musical landscape.",
     },
 ]
 
-export interface Event {
-    id: number;
-    title: string;
-    date: string;
-    time: string;
-    venue: string;
-    image: string;
-    interestedCount: number;
-    price: string;
-    isFeatured: boolean;
-    attendees: string[];
-}
 
-export const EVENTS: Event[] = [
+export const EVENTS: IEvent[] = [
     {
-        id: 1,
-        title: "CALVIN HARRIS - Live in Mumbai",
-        date: "Sat, 18 Apr",
-        time: "04:00 PM",
-        venue: "Infinity Bay: Mumbai",
-        image: "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czgvYmFubmVycy80MmQ4NTA4MC1kMWFmLTExZjAtOTk2Yi1kNTlmZTQwYmI5MTgtcmltZy13MTIwMC1oNjc1LWRjMTkxNTE2LWdtaXIud2VicD92PTE3NjQ5MjExMTI.avif",
-        interestedCount: 2821,
-        price: "3k",
+        id: "1",
+        title: "Shakira Live in Concert",
+        category: "Music",
+        coverImage:
+            "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&h=300&fit=crop",
+        date: "2024-04-15",
+        time: "8:00 PM",
+        venue: "Phoenix MarketCity",
+        location: "Mumbai",
+        distance: 2.5,
+        priceRange: { min: 1500, max: 5000 },
+        attendees: 2500,
+        isBookmarked: false,
         isFeatured: true,
-        attendees: [
-            "https://i.pravatar.cc/150?u=1",
-            "https://i.pravatar.cc/150?u=2",
-            "https://i.pravatar.cc/150?u=3",
-            "https://i.pravatar.cc/150?u=4",
+        organizer: "Live Nation",
+        ticketTiers: [
+            {
+                id: "1",
+                name: "General Admission",
+                price: 1500,
+                description: "Access to main arena",
+                available: 100,
+                total: 100,
+                perks: ["Main arena access", "Food court access"],
+            },
+            {
+                id: "2",
+                name: "VIP Pass",
+                price: 5500,
+                description: "Premium experience with exclusive perks",
+                available: 50,
+                total: 50,
+                perks: [
+                    "Front section access",
+                    "Dedicated bar",
+                    "VIP restrooms",
+                    "Fast track entry",
+                ],
+            },
+            {
+                id: "3",
+                name: "VVIP Pass",
+                price: 12000,
+                description: "Ultimate luxury package",
+                available: 25,
+                total: 25,
+                perks: [
+                    "Artist meet & greet",
+                    "Backstage access",
+                    "Premium bar",
+                    "Dedicated host",
+                    "Exclusive merchandise",
+                ],
+            },
         ],
     },
     {
-        id: 2,
-        title: "CALVIN HARRIS - Live in Mumbai",
-        date: "Sat, 18 Apr",
-        time: "04:00 PM",
-        venue: "Infinity Bay: Mumbai",
-        image: "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czgvYmFubmVycy80MmQ4NTA4MC1kMWFmLTExZjAtOTk2Yi1kNTlmZTQwYmI5MTgtcmltZy13MTIwMC1oNjc1LWRjMTkxNTE2LWdtaXIud2VicD92PTE3NjQ5MjExMTI.avif",
-        interestedCount: 2821,
-        price: "3k",
+        id: "4",
+        title: "Live Jazz Evening",
+        category: "Jazz",
+        coverImage:
+            "https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=500&h=300&fit=crop",
+        date: "2024-04-25",
+        time: "8:30 PM",
+        venue: "Blue Note Jazz Club",
+        location: "Mumbai",
+        distance: 6.8,
+        priceRange: { min: 1200, max: 3000 },
+        attendees: 200,
+        isBookmarked: true,
         isFeatured: true,
-        attendees: [
-            "https://i.pravatar.cc/150?u=1",
-            "https://i.pravatar.cc/150?u=2",
-            "https://i.pravatar.cc/150?u=3",
-            "https://i.pravatar.cc/150?u=4",
+        organizer: "Jazz Collective",
+        ticketTiers: [
+            {
+                id: "4",
+                name: "Early Bird Pass",
+                price: 1200,
+                description: "Limited early bird pricing",
+                available: 50,
+                total: 100,
+                perks: ["Early bird pricing", "Main venue access"],
+            },
+            {
+                id: "5",
+                name: "General Admission Pass",
+                price: 2000,
+                description: "Standard admission to the venue",
+                available: 80,
+                total: 150,
+                perks: ["Standard admission", "Bar access"],
+            },
+            {
+                id: "6",
+                name: "VIP Pass",
+                price: 3000,
+                description: "Premium experience package",
+                available: 15,
+                total: 25,
+                perks: ["VIP seating", "Complimentary drinks", "Meet the artist"],
+            },
         ],
     },
     {
-        id: 3,
-        title: "CALVIN HARRIS - Live in Mumbai",
-        date: "Sat, 18 Apr",
-        time: "04:00 PM",
-        venue: "Infinity Bay: Mumbai",
-        image: "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czgvYmFubmVycy80MmQ4NTA4MC1kMWFmLTExZjAtOTk2Yi1kNTlmZTQwYmI5MTgtcmltZy13MTIwMC1oNjc1LWRjMTkxNTE2LWdtaXIud2VicD92PTE3NjQ5MjExMTI.avif",
-        interestedCount: 2821,
-        price: "3k",
-        isFeatured: true,
-        attendees: [
-            "https://i.pravatar.cc/150?u=1",
-            "https://i.pravatar.cc/150?u=2",
-            "https://i.pravatar.cc/150?u=3",
-            "https://i.pravatar.cc/150?u=4",
+        id: "7",
+        title: "Electronic Music Festival",
+        category: "Electronic",
+        coverImage:
+            "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=500&h=300&fit=crop",
+        date: "2024-05-10",
+        time: "7:00 PM",
+        venue: "Mahalaxmi Race Course",
+        location: "Mumbai",
+        distance: 4.2,
+        priceRange: { min: 2000, max: 8000 },
+        attendees: 5000,
+        isBookmarked: false,
+        isFeatured: false,
+        organizer: "EDM Collective",
+        ticketTiers: [
+            {
+                id: "7",
+                name: "General Entry",
+                price: 2000,
+                description: "Access to main arena",
+                available: 500,
+                total: 1000,
+                perks: ["Main arena access", "Food court access"],
+            },
+            {
+                id: "8",
+                name: "VIP Experience",
+                price: 5000,
+                description: "Premium festival experience",
+                available: 50,
+                total: 100,
+                perks: ["VIP area access", "Premium bar", "Fast entry"],
+            },
+            {
+                id: "9",
+                name: "VVIP Backstage",
+                price: 8000,
+                description: "Ultimate backstage experience",
+                available: 10,
+                total: 20,
+                perks: [
+                    "Backstage access",
+                    "Artist meet & greet",
+                    "Premium hospitality",
+                ],
+            },
         ],
     },
     {
-        id: 4,
-        title: "CALVIN HARRIS - Live in Mumbai",
-        date: "Sat, 18 Apr",
-        time: "04:00 PM",
-        venue: "Infinity Bay: Mumbai",
-        image: "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czgvYmFubmVycy80MmQ4NTA4MC1kMWFmLTExZjAtOTk2Yi1kNTlmZTQwYmI5MTgtcmltZy13MTIwMC1oNjc1LWRjMTkxNTE2LWdtaXIud2VicD92PTE3NjQ5MjExMTI.avif",
-        interestedCount: 2821,
-        price: "3k",
-        isFeatured: true,
-        attendees: [
-            "https://i.pravatar.cc/150?u=1",
-            "https://i.pravatar.cc/150?u=2",
-            "https://i.pravatar.cc/150?u=3",
-            "https://i.pravatar.cc/150?u=4",
+        id: "10",
+        title: "Rock Concert Night",
+        category: "Rock",
+        coverImage:
+            "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=500&h=300&fit=crop",
+        date: "2024-05-20",
+        time: "8:00 PM",
+        venue: "Phoenix Arena",
+        location: "Mumbai",
+        distance: 3.5,
+        priceRange: { min: 1800, max: 6000 },
+        attendees: 3000,
+        isBookmarked: true,
+        isFeatured: false,
+        organizer: "Rock Nation",
+        ticketTiers: [
+            {
+                id: "10",
+                name: "Standing",
+                price: 1800,
+                description: "Standing area access",
+                available: 200,
+                total: 500,
+                perks: ["Standing area", "Bar access"],
+            },
+            {
+                id: "11",
+                name: "Seated",
+                price: 3500,
+                description: "Reserved seating",
+                available: 80,
+                total: 150,
+                perks: ["Reserved seat", "Premium view"],
+            },
+            {
+                id: "12",
+                name: "VIP Lounge",
+                price: 6000,
+                description: "VIP lounge experience",
+                available: 20,
+                total: 30,
+                perks: ["VIP lounge", "Meet & greet", "Premium drinks"],
+            },
         ],
-    }
+    },
 ]
 
 export const attendees = [
@@ -295,3 +416,148 @@ export const ARTISTS: Artist[] = [
         tourDates: tourDates,
     },
 ];
+
+export const trendingTopics = [
+    "Exhibition",
+    "Class",
+    "Workshop",
+    "Expo",
+    "Designer",
+    "Sport",
+    "Race",
+    "Spiritual",
+    "Fest",
+    "Business",
+    "Health",
+    "Movie",
+    "Comedy",
+    "Painting",
+    "Webinar",
+];
+
+
+interface EventSlide {
+    id: string;
+    title: string;
+    subtitle: string;
+    date: string;
+    time: string;
+    artists: string;
+    image: string;
+    gradient: [string, string];
+}
+
+export const eventSlides: EventSlide[] = [
+    {
+        id: "1",
+        title: "BYOM",
+        subtitle: "Bring Your Own Man",
+        date: "Sun, 08 Mar",
+        time: "04:00 PM",
+        artists: "Prince x Anya Yaps",
+        image:
+            "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1600&q=80",
+        gradient: ["rgba(255,182,193,0.88)", "rgba(255,105,180,0.62)"],
+    },
+    {
+        id: "2",
+        title: "Live Concert",
+        subtitle: "Rock the Night Away",
+        date: "Fri, 10 Mar",
+        time: "07:00 PM",
+        artists: "Coldplay x Local Band",
+        image:
+            "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1600&q=80",
+        gradient: ["rgba(138,43,226,0.88)", "rgba(127,90,240,0.58)"],
+    },
+    {
+        id: "3",
+        title: "Summer Fest",
+        subtitle: "Electronic Vibes",
+        date: "Sat, 15 Mar",
+        time: "06:00 PM",
+        artists: "DJ Martin x Local Artists",
+        image:
+            "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1600&q=80",
+        gradient: ["rgba(255,99,132,0.86)", "rgba(255,159,64,0.56)"],
+    },
+    {
+        id: "4",
+        title: "Jazz Night",
+        subtitle: "Smooth and Soulful",
+        date: "Sun, 16 Mar",
+        time: "08:00 PM",
+        artists: "Blue Note Quartet",
+        image:
+            "https://images.unsplash.com/photo-1511735111819-9a3f7709049c?auto=format&fit=crop&w=1600&q=80",
+        gradient: ["rgba(75,0,130,0.88)", "rgba(106,90,205,0.56)"],
+    },
+];
+
+interface FAQ {
+  id: string;
+  question: string;
+  answer: string;
+  category: string;
+}
+
+export const FAQ_DATA: FAQ[] = [
+    {
+      id: "1",
+      question: "How do I create an event?",
+      answer:
+        "To create an event, go to your Profile tab and tap 'Create New Event'. Fill in all the required details including event title, date, venue, and ticket information. You can also add artists by browsing our artist directory.",
+      category: "Events",
+    },
+    {
+      id: "2",
+      question: "How do I book an artist?",
+      answer:
+        "You can book an artist by going to the Discover tab, finding the artist you want, and tapping 'Send Request'. Fill in your event details and budget. The artist will receive your request and can accept or decline.",
+      category: "Bookings",
+    },
+    {
+      id: "3",
+      question: "What payment methods are accepted?",
+      answer:
+        "We accept all major credit cards, debit cards, UPI, net banking, and digital wallets. All payments are processed securely through our payment partners.",
+      category: "Payments",
+    },
+    {
+      id: "4",
+      question: "How do I get verified?",
+      answer:
+        "To get verified, complete your profile with accurate information, upload ID proof, and have at least 5 successful bookings. Our team will review your profile and award verification badges.",
+      category: "Account",
+    },
+    {
+      id: "5",
+      question: "Can I cancel my event?",
+      answer:
+        "Yes, you can cancel events. Go to 'My Events', select the event, and choose 'Cancel Event'. Please note that cancellation policies and refund terms apply based on the timing of cancellation.",
+      category: "Events",
+    },
+    {
+      id: "6",
+      question: "How do refunds work?",
+      answer:
+        "Refunds are processed based on our refund policy. For cancellations made 7+ days before the event, full refunds are provided. For cancellations within 7 days, partial refunds may apply.",
+      category: "Payments",
+    },
+    {
+      id: "7",
+      question: "How to change my account type?",
+      answer:
+        "You can switch between Artist, Event Organizer, and Entertainment Seeker profiles in your Profile settings. Each profile type has different features and capabilities.",
+      category: "Account",
+    },
+    {
+      id: "8",
+      question: "What if an artist doesn't show up?",
+      answer:
+        "If an artist doesn't show up for a confirmed booking, contact our support team immediately. We have policies in place to protect event organizers and will work to resolve the issue.",
+      category: "Bookings",
+    },
+  ];
+  
+  

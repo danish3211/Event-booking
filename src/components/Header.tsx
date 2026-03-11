@@ -1,13 +1,14 @@
 import { Link, useLocation } from '@tanstack/react-router'
-import { CircleUserRound, Plus, LogOut } from 'lucide-react'
-import { Wrapper } from './ui/Wrapper'
-import CitySelector from './ui/CitySelector'
+import { CircleUserRound, LogOut, Plus } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import CitySelector from './ui/CitySelector'
+import { Wrapper } from './ui/Wrapper'
 
 export default function Header() {
   const location = useLocation()
   const [user, setUser] = useState<{ name: string; avatar: string } | null>(null)
 
+  const isHomePage = location.pathname === '/'
   const isAuthPage = location.pathname === '/login' || location.pathname === '/signup'
 
   useEffect(() => {
@@ -23,18 +24,20 @@ export default function Header() {
     window.location.reload()
   }
 
+
   return (
-    <div className='bg-secondary'>
+    <div className={`z-50 w-full ${isHomePage ? 'absolute top-0 left-0 bg-transparent' : 'bg-transparent'}`}>
       <Wrapper>
-        <header className="p-4 flex items-center justify-between text-white shadow-lg gap-5">
+        <header className={`p-4 flex items-center justify-between text-white gap-5 ${isHomePage ? '' : 'shadow-lg'}`}>
           <div className="flex items-center justify-between">
             <h1 className="ml-4 text-xl font-semibold">
               <Link to="/">
-                <img
+                {/* <img
                   src="/tanstack-word-logo-white.svg"
                   alt="TanStack Logo"
                   className="h-10"
-                />
+                /> */}
+                <p className="">Book The Beats</p>
               </Link>
             </h1>
 
@@ -76,9 +79,6 @@ export default function Header() {
                 </div>
               ) : (
                 <>
-                  <Link to="/login" className="font-medium hover:text-vivid transition-colors px-2">
-                    Log In
-                  </Link>
                   <Link to="/signup" className="flex items-center gap-1.5 cursor-pointer bg-primary/20 hover:bg-primary/40 px-4 py-2 rounded-full border border-primary/50 transition-all font-medium">
                     <CircleUserRound size={18} />
                     <span>Sign Up</span>

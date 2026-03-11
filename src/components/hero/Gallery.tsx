@@ -77,10 +77,10 @@ export default function Gallery() {
   return (
     <section className="py- overflow-hidden">
       <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-5xl font-medium text-text mb-4">
+        <h2 className="text-3xl md:text-5xl font-medium text-background mb-4">
           Loved by millions. Lived on AllEvents
         </h2>
-        <p className="text-primary/50 text-lg">
+        <p className="text-background/50 text-lg">
           Join the people turning moments into memories.
         </p>
       </div>
@@ -88,8 +88,8 @@ export default function Gallery() {
       {/* The Gallery Container - Horizontal Layout with Vertical Columns inside */}
       <div className="w-full overflow-hidden relative group h-[600px]">
         {/* Fade gradients at top and bottom */}
-        <div className="absolute top-0 left-0 right-0 h-24 bg-linear-to-b from-white to-transparent z-10 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-secondary to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-24 bg-linear-to-b from-[#141414] to-transparent z-10 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-[#141414] to-transparent z-10 pointer-events-none" />
 
         <div className="flex justify-center gap-6 h-full px-4">
           

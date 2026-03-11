@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SignupRouteImport } from './routes/signup'
-import { Route as LoginRouteImport } from './routes/login'
 import { Route as CreateRouteImport } from './routes/create'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -23,11 +22,6 @@ import { Route as CityCategoryRouteImport } from './routes/$city/$category'
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CreateRoute = CreateRouteImport.update({
@@ -75,7 +69,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/create': typeof CreateRoute
-  '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/$city/$category': typeof CityCategoryRoute
   '/artist/$artistId': typeof ArtistArtistIdRoute
@@ -87,7 +80,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/create': typeof CreateRoute
-  '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/$city/$category': typeof CityCategoryRoute
   '/artist/$artistId': typeof ArtistArtistIdRoute
@@ -100,7 +92,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/create': typeof CreateRoute
-  '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/$city/$category': typeof CityCategoryRoute
   '/artist/$artistId': typeof ArtistArtistIdRoute
@@ -114,7 +105,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/create'
-    | '/login'
     | '/signup'
     | '/$city/$category'
     | '/artist/$artistId'
@@ -126,7 +116,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/create'
-    | '/login'
     | '/signup'
     | '/$city/$category'
     | '/artist/$artistId'
@@ -138,7 +127,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/create'
-    | '/login'
     | '/signup'
     | '/$city/$category'
     | '/artist/$artistId'
@@ -151,7 +139,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   CreateRoute: typeof CreateRoute
-  LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
   CityCategoryRoute: typeof CityCategoryRoute
   ArtistArtistIdRoute: typeof ArtistArtistIdRoute
@@ -167,13 +154,6 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/create': {
@@ -239,7 +219,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   CreateRoute: CreateRoute,
-  LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
   CityCategoryRoute: CityCategoryRoute,
   ArtistArtistIdRoute: ArtistArtistIdRoute,

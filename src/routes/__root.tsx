@@ -1,4 +1,4 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { HeadContent, Scripts, createRootRoute, useRouterState } from '@tanstack/react-router'
 
 import Header from '../components/Header'
 
@@ -32,16 +32,19 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const state = useRouterState()
+  const isSignupPage = state.location.pathname === '/signup'
+
   return (
     <html lang="en">
       <head>
         <HeadContent />
       </head>
       <body>
-        <Header />
+        {!isSignupPage && <Header />}
         {children}
         <Scripts />
-        <Footer />
+        {!isSignupPage && <Footer />}
       </body>
     </html>
   )

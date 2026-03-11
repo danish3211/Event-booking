@@ -10,6 +10,7 @@
 }
 
 body {
+  background-color: #141414;
   @apply m-0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -53,4 +54,18 @@ code {
 .group:hover .animate-scroll-up,
 .group:hover .animate-scroll-down {
   animation-play-state: paused;
+}
+
+/* Target the specific class */
+.no-scrollbar {
+    /* For Firefox */
+    scrollbar-width: none;
+    
+    /* For Internet Explorer and Edge */
+    -ms-overflow-style: none;
+}
+
+/* For Chrome, Safari, and newer versions of Edge */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
 }

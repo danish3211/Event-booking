@@ -16,10 +16,10 @@ export default function AllCategoriesGrid() {
             category: cat.slug,
           }}
           target="_blank"
-         className="rounded-2xl border border-surface/30 bg-background hover:bg-primary/10 transition-transform hover:scale-105 hover:border-primary/50 p-6 text-center shadow-xs"
-        >
-          <span className="text-7xl">{cat.icon}</span>
-          <span className="font-medium text-3xl text-text">{cat.name}</span>
+          //  className="rounded-2xl border border-surface/30 bg-background hover:bg-primary/10 transition-transform hover:scale-105 hover:border-primary/50 p-6 text-center shadow-xs"
+          className="flex items-center justify-center rounded-2xl border border-surface/40 p-6 hover:bg-primary/10 hover:border-primary/50 transition-all font-medium text-background hover:text-primary" >
+          <span className="text-4xl">{cat.icon}</span>
+          <span className="mt-2 font-semibold">{cat.name}</span>
         </Link>
       ))}
     </div>

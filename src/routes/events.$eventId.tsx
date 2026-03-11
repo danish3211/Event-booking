@@ -96,6 +96,38 @@ function EventDetails() {
               </p>
             </div>
 
+            {/* Event Details Section */}
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold">Event Details</h2>
+              <div className="bg-slate-50/50 rounded-3xl p-8 space-y-4">
+                <div className="flex justify-between items-center text-lg">
+                  <span className="text-text/70 font-medium">Age Restriction</span>
+                  <span className="font-bold">18+</span>
+                </div>
+                <div className="flex justify-between items-center text-lg">
+                  <span className="text-text/70 font-medium">Dress Code</span>
+                  <span className="font-bold">Casual</span>
+                </div>
+                <div className="flex justify-between items-center text-lg">
+                  <span className="text-text/70 font-medium">Expected Attendees</span>
+                  <span className="font-bold">0</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Amenities Section */}
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold">Amenities</h2>
+              <div className="flex flex-wrap gap-3">
+                <span className="px-6 py-2 rounded-full bg-primary/10 text-primary font-bold">
+                  Parking
+                </span>
+                <span className="px-6 py-2 rounded-full bg-primary/10 text-primary font-bold">
+                  Bar
+                </span>
+              </div>
+            </div>
+
             <div className="">
               <h2 className="text-2xl font-bold">Ticket info</h2>
               <div className="w-full mb-8">

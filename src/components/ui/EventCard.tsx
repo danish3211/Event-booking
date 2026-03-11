@@ -1,127 +1,109 @@
-import { Link } from '@tanstack/react-router';
-import { Heart, MapPin } from 'lucide-react';
+import type { IEvent } from "@/interfaces/Event.interface";
+import { formatDateInput } from "@/lib/utils";
+import { motion } from "framer-motion";
+import {
+  Bookmark,
+  BookmarkCheck,
+  Calendar,
+  MapPin,
+  Users
+} from "lucide-react";
+import React, { useState } from "react";
+
 
 interface EventCardProps {
-  id: number | string;
-  image: string;
-  date: string;
-  time: string;
-  title: string;
-  venue: string;
-  interestedCount: number;
-  price?: string;
-  category?: string;
-  attendees: string[];
+  event: IEvent;
 }
 
-export const EventCard = ({
-  id,
-  image,
-  date,
-  time,
-  title,
-  venue,
-  interestedCount,
-  price,
-  category = "Concert",
-  attendees
-}: EventCardProps) => {
+const EventCard: React.FC<EventCardProps> = ({ event }) => {
+  const [isBookmarked, setIsBookmarked] = useState(event.isBookmarked);
+  const [showTicketModal, setShowTicketModal] = useState(false);
+
   return (
-    <Link
-    target='_blank'
-      to="/events/$eventId"
-      params={{ eventId: id.toString() }}
-      className="group relative w-full max-w-[340px] transition-all duration-500 cursor-pointer">
-      {/* Background Glow (Visible on Hover) */}
-      <div className="absolute -inset-1 rounded-[2.5rem] bg-linear-to-r from-primary to-vivid opacity-0 blur transition duration-500 group-hover:opacity-30" />
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      className="group relative flex flex-col overflow-hidden rounded-3xl bg-[#141414] border border-white/10 shadow-xl transition-colors hover:border-[#8A3FFC]/50"
+    >
+      {/* Image Section */}
+      <div className="relative h-48 w-full overflow-hidden">
+        <img
+          src={event.coverImage}
+          alt={event.title}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1625] via-transparent to-black/20" />
 
-      {/* Main Card Body */}
-      <div className="relative flex flex-col overflow-hidden rounded-4xl bg-surface/20 border border-surface/30 shadow-2xl backdrop-blur-sm">
+        {/* Category Badge */}
+        <div className="absolute left-4 top-4 rounded-full bg-black/40 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md border border-white/10">
+          {event.category}
+        </div>
 
-        {/* Image Section */}
-        <div className="relative h-52 w-full overflow-hidden">
-          <img
-            src={image}
-            alt={title}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
-          />
+        {/* Bookmark Button */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsBookmarked(!isBookmarked);
+          }}
+          className="absolute right-4 top-4 rounded-xl bg-black/40 p-2 text-white backdrop-blur-md border border-white/10 transition-colors hover:bg-[#8A3FFC]"
+        >
+          {isBookmarked ? (
+            <BookmarkCheck size={18} fill="currentColor" />
+          ) : (
+            <Bookmark size={18} />
+          )}
+        </button>
+      </div>
 
-          {/* Top Overlay: Category & Like */}
-          <div className="absolute inset-x-0 top-0 flex justify-between p-4">
-            <span className="rounded-full bg-white/10 px-3 py-1 h-fit text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur-md border border-white/20">
-              {category}
+      {/* Content Section */}
+      <div className="flex flex-col p-5">
+        <div className="mb-3 flex items-start justify-between gap-4">
+          <h3 className="line-clamp-2 text-lg font-bold text-white leading-tight">
+            {event.title}
+          </h3>
+          <span className="whitespace-nowrap text-lg font-bold text-[#8A3FFC]">
+            ₹{event.priceRange.min.toLocaleString()}+
+          </span>
+        </div>
+
+        {/* Info Rows */}
+        <div className="space-y-2 mb-4">
+          <div className="flex items-center gap-2 text-sm">
+            <Calendar size={14} className="text-[#8A3FFC]" />
+            <span className="text-[#FFD700] font-medium">
+              {formatDateInput(event.date)} • {event.time}
             </span>
-            <button className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition-colors hover:bg-primary/80">
-              <Heart size={18} />
-            </button>
           </div>
 
-          {/* Bottom Overlay: Date Pill */}
-          <div className="absolute bottom-4 left-4">
-            <div className="flex items-center gap-2 rounded-xl bg-white/20 p-2 px-3 shadow-xl text-white">
-              <span className="text-xs font-black  leading-none">{date.split(',')[0]}</span>
-              <div className="h-3 w-px bg-primary" />
-              <span className="text-xs font-bold leading-none">{time}</span>
-            </div>
+          <div className="flex items-start gap-2 text-sm text-gray-400">
+            <MapPin size={14} className="text-[#8A3FFC] mt-0.5 shrink-0" />
+            <span className="line-clamp-1 flex-1">
+              {event.venue}, {event.location}
+            </span>
+            <span className="text-xs text-gray-500">{event.distance}km</span>
           </div>
         </div>
 
-        {/* Content Section */}
-        <div className="flex flex-col p-5">
-          <h3 className="mb-2 line-clamp-1 text-xl font-bold text-text">
-            {title}
-          </h3>
-
-          <div className="flex items-center gap-2 text-text/60">
-            <MapPin size={16} className="text-primary" />
-            <span className="text-sm font-medium truncate">{venue}</span>
+        {/* Footer Row */}
+        <div className="mt-auto flex items-center justify-between pt-4 border-t border-white/5">
+          <div className="flex items-center gap-2 text-gray-400 text-sm font-medium">
+            <Users size={14} />
+            {event.attendees.toLocaleString()}
           </div>
 
-          {/* Footer: Price and Social Proof */}
-          <div className="mt-2 flex items-center justify-between rounded-2xl bg-white/5 p-3">
-            <div className="flex items-center gap-3">
-              {/* Avatar Stack */}
-              <div className="flex -space-x-2 overflow-hidden p-1">
-                {attendees.slice(0, 3).map((url, i) => (
-                  <img
-                    key={i}
-                    src={url}
-                    alt={`Attendee ${i + 1}`}
-                    className="inline-block h-7 w-7 rounded-full object-cover hover:translate-y-[-2px] transition-transform cursor-pointer"
-                  />
-                ))}
-
-                {/* If more than 3 attendees, show the count */}
-                {attendees.length > 3 && (
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white border border-white/20">
-                    +{attendees.length - 3}
-                  </div>
-                )}
-              </div>
-
-              <div className="flex flex-col">
-                <span className="text-[10px] font-bold text-text/50 tracking-tight">
-                  {interestedCount.toLocaleString()}+ Interested
-                </span>
-                <span className="text-[8px] uppercase font-medium text-text/50">
-                  Join the vibe
-                </span>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-end">
-              <span className="text-[10px] text-text/50 uppercase font-bold">Starts at</span>
-              <span className="text-sm font-black text-text italic">
-                {price ? `₹${price}` : 'FREE'}
-              </span>
-            </div>
-          </div>
-
-          <button className="mt-4 w-full rounded-xl bg-primary hover:bg-vivid py-3 text-xs font-bold text-white transition-all active:scale-95 shadow-lg shadow-primary/20">
-            Get Tickets
+          <button
+            onClick={() => setShowTicketModal(true)}
+            className="flex items-center gap-2 rounded-full bg-white px-5 py-2 text-sm font-bold text-black transition-all hover:bg-[#8A3FFC] hover:text-white"
+          >
+            Book Tickets
           </button>
         </div>
       </div>
-    </Link>
+
+      {/* Logic for Modal would go here (e.g., using a Portal or Radix UI) */}
+    </motion.div>
   );
 };
+
+export default EventCard;

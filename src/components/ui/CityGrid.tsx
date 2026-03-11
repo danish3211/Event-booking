@@ -31,8 +31,8 @@ export default function CityGrid({
           </div>
 
           <div className="text-left">
-            <p className="font-medium text-text">{city.name}</p>
-            <p className="text-sm text-text/60">
+            <p className="font-medium text-background">{city.name}</p>
+            <p className="text-sm text-background/60">
               {city.events}+ Events
             </p>
           </div>

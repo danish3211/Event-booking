@@ -51,18 +51,18 @@ export default function CitySelector({
         {/* Close button handled inside Modal if you added title */}
         
         <div className="mb-5">
-          <h2 className="text-2xl font-semibold text-center">
+          <h2 className="text-2xl font-semibold text-center text-background">
             AllEvents in your city
           </h2>
         </div>
 
         {/* Search */}
         <div className="flex items-center border rounded-lg px-4 py-3 mb-6">
-          <Search size={30} className="mr-2 text-gray-800" />
+          <Search size={30} className="mr-2 text-background" />
           <input
             type="text"
             placeholder="Enter your city..."
-            className="w-full outline-none text-xl"
+            className="w-full outline-none text-xl text-background"
           />
 
           <button className="flex items-center cursor-pointer gap-2 text-blue-600 font-medium w-[200px]">
@@ -73,7 +73,7 @@ export default function CitySelector({
 
         {/* City Grid */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">
+          <h3 className="text-lg font-semibold mb-4 text-background">
             Explore Cities Near You
           </h3>
 

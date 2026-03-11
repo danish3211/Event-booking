@@ -1,7 +1,7 @@
 // src/routes/$city/$category.tsx
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { CustomDropdown } from "@/components/ui/CustomDropdown";
-import { EventCard } from "@/components/ui/EventCard";
+import EventCard from "@/components/ui/EventCard";
 import { TourDatesTable } from "@/components/ui/TourDatesTable";
 import { Wrapper } from "@/components/ui/Wrapper";
 import { CATEGORY_CONFIG, CATEGORIES, EVENTS, attendees, date, price, tourDates } from "@/constants";
@@ -114,11 +114,11 @@ function CategoryPage() {
       </div>
       <div className="grid md:grid-cols-4 gap-6">
         {EVENTS.map((event) => (
-          <EventCard key={event.id} {...event} />
+          <EventCard event={event} key={event.id} />
         ))}
       </div>
       <div className="mt-6 py-10">
-        <p className="text-3xl font-medium tracking-tight text-text">
+        <p className="text-3xl font-medium tracking-tight text-background">
           Upcoming {data.title}
           &nbsp;  in {city.charAt(0).toUpperCase() + city.slice(1)}
         </p>

@@ -16,7 +16,7 @@ export default function ExploreCity() {
 
     return (
         <div className="">
-            <p className="text-3xl font-semibold">Explore Cities near you</p>
+            <p className="text-3xl font-semibold text-background">Explore Cities near me</p>
             <CityGrid
                 className='mt-10 text-2xl! flex! justify-center gap-15'
                 cities={cities}

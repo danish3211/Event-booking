@@ -22,7 +22,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ name, subtitle, image, onFoll
                     className="relative w-full h-full object-cover rounded-full border-2 border-primary/50 group-hover:border-primary shadow-lg"
                 />
             </div>
-            <h3 className="text-xl font-bold text-text mb-1">{name}</h3>
+            <h3 className="text-xl font-bold text-background mb-1">{name}</h3>
             <p className="text-surface font-medium mb-4">{subtitle}</p>
             <button
                 onClick={(e) => {

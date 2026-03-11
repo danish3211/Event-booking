@@ -29,7 +29,7 @@ export default function Modal({
 }: ModalProps) {
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-50" onClose={onClose}>
+      <Dialog as="div" className="relative z-50 " onClose={onClose}>
 
         {/* Background */}
         <Transition.Child
@@ -41,7 +41,7 @@ export default function Modal({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" />
+          <div className="fixed inset-0  bg-black/40 backdrop-blur-sm " />
         </Transition.Child>
 
         <div className="fixed inset-0 flex items-center justify-center p-4">
@@ -58,11 +58,11 @@ export default function Modal({
             <Dialog.Panel
               className={`
                 w-full 
-                ${sizeMap[size]} 
-                bg-white 
+                ${sizeMap[size]}  
                 rounded-2xl 
                 shadow-xl 
                 p-0
+                 bg-black/60 backdrop-blur-sm 
               `}
             >
               {/* Header */}
@@ -71,8 +71,9 @@ export default function Modal({
                   className="
         sticky top-0 
         z-10 
-        bg-white 
+        bg-primary 
         p-5
+        rounded-t-xl
         flex justify-between items-center
       "
                 >
@@ -87,8 +88,8 @@ export default function Modal({
               )}
 
               {/* Content */}
-                
-              <div className="max-h-[75vh] overflow-y-auto p-6">
+
+              <div className="max-h-[75vh] overflow-y-auto no-scrollbar p-6 shadow-inner">
                 {children}
               </div>
             </Dialog.Panel>

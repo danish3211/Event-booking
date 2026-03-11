@@ -10,15 +10,16 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          
+
           {/* Brand Column */}
           <div className="space-y-6">
             <Link to="/" className="inline-block">
-              <img
+              {/* <img
                 src="/tanstack-word-logo-white.svg"
                 alt="TanStack Logo"
                 className="h-10"
-              />
+              /> */}
+              <p className="text-2xl font-bold text-white">Book The Beats</p>
             </Link>
             <p className="text-sm leading-relaxed text-white/70">
               Discover the most happening events around you. Explore what's cooking in your city and turn moments into unforgettable memories!
@@ -69,7 +70,7 @@ export default function Footer() {
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3">
                 <MapPin className="text-primary mt-1" size={18} />
-                <span className="leading-relaxed">Tower 3, Infinity Bay Layout,<br/>Mumbai, India - 400030</span>
+                <span className="leading-relaxed">Tower 3, Infinity Bay Layout,<br />Mumbai, India - 400030</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="text-primary" size={18} />
