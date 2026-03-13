@@ -20,7 +20,7 @@ export const Route = createFileRoute('/create')({
 
 function CreateEvent() {
   return (
-    <div className="bg-[#f9f9fb] min-h-screen text-text font-sans pb-20">
+    <div className=" min-h-screen text-text font-sans pb-20">
 
       <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
         
@@ -28,31 +28,31 @@ function CreateEvent() {
         <div className="lg:col-span-2 space-y-10">
           
           <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-bold text-secondary">Create an event</h1>
+            <h1 className="text-3xl font-bold text-background">Create an event</h1>
           </div>
 
           {/* Event Name */}
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-text">Event Name <span className="text-red-500">*</span></label>
+            <label className="text-sm font-semibold text-background">Event Name <span className="text-red-500">*</span></label>
             <input 
               type="text" 
               placeholder="Enter the name of your event" 
-              className="w-full bg-white border border-surface/30 rounded-xl px-4 py-3 placeholder:text-text/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-text"
+              className="w-full bg-white/30 border border-surface/30 rounded-xl px-4 py-3 placeholder:text-text/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-text"
             />
           </div>
 
           {/* Location */}
           <div className="space-y-4">
             <div>
-              <h2 className="text-xl font-bold text-secondary">Location</h2>
-              <p className="text-sm text-text/60">Choose where your event will take place.</p>
+              <h2 className="text-xl font-bold text-background">Location</h2>
+              <p className="text-sm text-background/60">Choose where your event will take place.</p>
             </div>
             
-            <p className="text-xs font-bold text-text mb-2">Where will your event take place?</p>
+            <p className="text-xs font-bold text-background mb-2">Where will your event take place?</p>
             
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* Venue */}
-              <button className="flex flex-col items-center justify-center text-center p-6 bg-white border-2 border-primary/20 rounded-2xl shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] hover:border-primary transition-all group">
+              <button className="flex flex-col items-center justify-center text-center p-6 bg-white/20 border-2 border-primary/20 rounded-2xl shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] hover:border-primary transition-all group">
                 <div className="w-12 h-12 rounded-full bg-surface/10 flex items-center justify-center text-text/60 group-hover:text-primary group-hover:bg-primary/10 transition-colors mb-4">
                   <MapPin size={24} />
                 </div>
@@ -61,7 +61,7 @@ function CreateEvent() {
               </button>
 
               {/* Online */}
-              <button className="flex flex-col items-center justify-center text-center p-6 bg-white border border-surface/30 rounded-2xl hover:border-surface/60 transition-all group">
+              <button className="flex flex-col items-center justify-center text-center p-6 bg-white/20 border border-surface/30 rounded-2xl hover:border-surface/60 transition-all group">
                 <div className="w-12 h-12 rounded-full bg-surface/10 flex items-center justify-center text-text/60 group-hover:text-primary group-hover:bg-primary/10 transition-colors mb-4">
                   <Video size={24} />
                 </div>
@@ -70,7 +70,7 @@ function CreateEvent() {
               </button>
 
               {/* Recorded */}
-              <button className="flex flex-col items-center justify-center text-center p-6 bg-white border border-surface/30 rounded-2xl hover:border-surface/60 transition-all group">
+              <button className="flex flex-col items-center justify-center text-center p-6 bg-white/20 border border-surface/30 rounded-2xl hover:border-surface/60 transition-all group">
                 <div className="w-12 h-12 rounded-full bg-surface/10 flex items-center justify-center text-text/60 group-hover:text-primary group-hover:bg-primary/10 transition-colors mb-4">
                   <MonitorPlay size={24} />
                 </div>
@@ -83,19 +83,19 @@ function CreateEvent() {
           {/* Date & Time */}
           <div className="space-y-4 pt-4">
             <div>
-              <h2 className="text-xl font-bold text-secondary">Date and time</h2>
-              <p className="text-sm text-text/60">Select the event date, time, and timezone.</p>
+              <h2 className="text-xl font-bold text-background">Date and time</h2>
+              <p className="text-sm text-background/60">Select the event date, time, and timezone.</p>
             </div>
 
-            <div className="space-y-6 bg-white p-6 rounded-2xl border border-surface/20 shadow-xs">
+            <div className="space-y-6 bg-white/20 p-6 rounded-2xl border border-surface/20 shadow-xs">
               
               <div className="space-y-2">
                 <label className="text-xs font-bold text-text">Event type <span className="text-red-500">*</span></label>
                 <div className="flex gap-4">
-                  <button className="px-6 py-2.5 bg-[#f0faeb] border border-[#a2e38c] text-[#2c7a10] text-sm font-semibold rounded-lg flex items-center gap-2">
+                  <button className="px-6 py-2.5 bg-green-500/20 border border-green-500/50 text-green-500 text-sm font-semibold rounded-lg flex items-center gap-2">
                     Single event <span className="w-4 h-4 rounded-full border border-current flex items-center justify-center text-[10px]">✓</span>
                   </button>
-                  <button className="px-6 py-2.5 bg-white border border-surface/30 text-text/60 hover:text-text hover:border-surface/60 text-sm font-semibold rounded-lg transition-colors">
+                  <button className="px-6 py-2.5 bg-white/20 border border-surface/30 text-text/60 hover:text-text hover:border-surface/60 text-sm font-semibold rounded-lg transition-colors">
                     Recurring event
                   </button>
                 </div>

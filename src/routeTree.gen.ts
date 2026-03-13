@@ -16,8 +16,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as UserUsernameRouteImport } from './routes/user.$username'
 import { Route as HotsHostIdRouteImport } from './routes/hots.$hostId'
 import { Route as EventsEventIdRouteImport } from './routes/events.$eventId'
-import { Route as ArtistArtistIdRouteImport } from './routes/artist.$artistId'
 import { Route as CityCategoryRouteImport } from './routes/$city/$category'
+import { Route as ArtistArtistIdRouteImport } from './routes/$artist/$artistId'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -54,14 +54,14 @@ const EventsEventIdRoute = EventsEventIdRouteImport.update({
   path: '/events/$eventId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ArtistArtistIdRoute = ArtistArtistIdRouteImport.update({
-  id: '/artist/$artistId',
-  path: '/artist/$artistId',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CityCategoryRoute = CityCategoryRouteImport.update({
   id: '/$city/$category',
   path: '/$city/$category',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArtistArtistIdRoute = ArtistArtistIdRouteImport.update({
+  id: '/$artist/$artistId',
+  path: '/$artist/$artistId',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -70,8 +70,8 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/create': typeof CreateRoute
   '/signup': typeof SignupRoute
+  '/$artist/$artistId': typeof ArtistArtistIdRoute
   '/$city/$category': typeof CityCategoryRoute
-  '/artist/$artistId': typeof ArtistArtistIdRoute
   '/events/$eventId': typeof EventsEventIdRoute
   '/hots/$hostId': typeof HotsHostIdRoute
   '/user/$username': typeof UserUsernameRoute
@@ -81,8 +81,8 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/create': typeof CreateRoute
   '/signup': typeof SignupRoute
+  '/$artist/$artistId': typeof ArtistArtistIdRoute
   '/$city/$category': typeof CityCategoryRoute
-  '/artist/$artistId': typeof ArtistArtistIdRoute
   '/events/$eventId': typeof EventsEventIdRoute
   '/hots/$hostId': typeof HotsHostIdRoute
   '/user/$username': typeof UserUsernameRoute
@@ -93,8 +93,8 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/create': typeof CreateRoute
   '/signup': typeof SignupRoute
+  '/$artist/$artistId': typeof ArtistArtistIdRoute
   '/$city/$category': typeof CityCategoryRoute
-  '/artist/$artistId': typeof ArtistArtistIdRoute
   '/events/$eventId': typeof EventsEventIdRoute
   '/hots/$hostId': typeof HotsHostIdRoute
   '/user/$username': typeof UserUsernameRoute
@@ -106,8 +106,8 @@ export interface FileRouteTypes {
     | '/about'
     | '/create'
     | '/signup'
+    | '/$artist/$artistId'
     | '/$city/$category'
-    | '/artist/$artistId'
     | '/events/$eventId'
     | '/hots/$hostId'
     | '/user/$username'
@@ -117,8 +117,8 @@ export interface FileRouteTypes {
     | '/about'
     | '/create'
     | '/signup'
+    | '/$artist/$artistId'
     | '/$city/$category'
-    | '/artist/$artistId'
     | '/events/$eventId'
     | '/hots/$hostId'
     | '/user/$username'
@@ -128,8 +128,8 @@ export interface FileRouteTypes {
     | '/about'
     | '/create'
     | '/signup'
+    | '/$artist/$artistId'
     | '/$city/$category'
-    | '/artist/$artistId'
     | '/events/$eventId'
     | '/hots/$hostId'
     | '/user/$username'
@@ -140,8 +140,8 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CreateRoute: typeof CreateRoute
   SignupRoute: typeof SignupRoute
-  CityCategoryRoute: typeof CityCategoryRoute
   ArtistArtistIdRoute: typeof ArtistArtistIdRoute
+  CityCategoryRoute: typeof CityCategoryRoute
   EventsEventIdRoute: typeof EventsEventIdRoute
   HotsHostIdRoute: typeof HotsHostIdRoute
   UserUsernameRoute: typeof UserUsernameRoute
@@ -198,18 +198,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsEventIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/artist/$artistId': {
-      id: '/artist/$artistId'
-      path: '/artist/$artistId'
-      fullPath: '/artist/$artistId'
-      preLoaderRoute: typeof ArtistArtistIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/$city/$category': {
       id: '/$city/$category'
       path: '/$city/$category'
       fullPath: '/$city/$category'
       preLoaderRoute: typeof CityCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$artist/$artistId': {
+      id: '/$artist/$artistId'
+      path: '/$artist/$artistId'
+      fullPath: '/$artist/$artistId'
+      preLoaderRoute: typeof ArtistArtistIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -220,8 +220,8 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CreateRoute: CreateRoute,
   SignupRoute: SignupRoute,
-  CityCategoryRoute: CityCategoryRoute,
   ArtistArtistIdRoute: ArtistArtistIdRoute,
+  CityCategoryRoute: CityCategoryRoute,
   EventsEventIdRoute: EventsEventIdRoute,
   HotsHostIdRoute: HotsHostIdRoute,
   UserUsernameRoute: UserUsernameRoute,

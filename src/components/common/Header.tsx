@@ -1,14 +1,18 @@
 import { Link, useLocation } from '@tanstack/react-router'
 import { CircleUserRound, LogOut, Plus } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import CitySelector from './ui/CitySelector'
-import { Wrapper } from './ui/Wrapper'
+import { Wrapper } from '../ui/Wrapper'
+import CitySelector from '../ui/CitySelector'
+
 
 export default function Header() {
   const location = useLocation()
   const [user, setUser] = useState<{ name: string; avatar: string } | null>(null)
 
-  const isHomePage = location.pathname === '/'
+  const isTransparentHeader = 
+    location.pathname === '/' || 
+    location.pathname.startsWith('/events/') || 
+    location.pathname.startsWith('/artist/')
   const isAuthPage = location.pathname === '/login' || location.pathname === '/signup'
 
   useEffect(() => {
@@ -26,9 +30,9 @@ export default function Header() {
 
 
   return (
-    <div className={`z-50 w-full ${isHomePage ? 'absolute top-0 left-0 bg-transparent' : 'bg-transparent'}`}>
+    <div className={`z-50 w-full ${isTransparentHeader ? 'absolute top-0 left-0 bg-transparent' : 'bg-transparent'}`}>
       <Wrapper>
-        <header className={`p-4 flex items-center justify-between text-white gap-5 ${isHomePage ? '' : 'shadow-lg'}`}>
+        <header className={`p-4 flex items-center justify-between text-white gap-5 ${isTransparentHeader ? '' : 'shadow-lg'}`}>
           <div className="flex items-center justify-between">
             <h1 className="ml-4 text-xl font-semibold">
               <Link to="/">

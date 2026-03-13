@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from './Button';
 
 interface ProfileCardProps {
     name: string;
@@ -24,15 +25,14 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ name, subtitle, image, onFoll
             </div>
             <h3 className="text-xl font-bold text-background mb-1">{name}</h3>
             <p className="text-surface font-medium mb-4">{subtitle}</p>
-            <button
+            <Button
+                variant="primary"
+                title="Follow"
                 onClick={(e) => {
                     e.stopPropagation();
                     onFollow?.();
                 }}
-                className="px-8 py-2 border-2 border-primary text-primary font-semibold rounded-md hover:bg-primary hover:text-white transition-colors"
-            >
-                Follow
-            </button>
+            />
         </div>
     );
 };

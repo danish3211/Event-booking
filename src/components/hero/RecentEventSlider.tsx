@@ -1,6 +1,8 @@
-import { eventSlides } from "@/constants";
+import { allEvents, eventSlides } from "@/constants";
 import { useCallback, useEffect, useRef, useState } from "react";
 import SearchBar from "../ui/SearchBar";
+import { useNavigate } from "@tanstack/react-router";
+import { slugify } from "@/lib/utils";
 
 
 export function EventSlide() {
@@ -15,7 +17,14 @@ export function EventSlide() {
     const nextSlide = slideRefs.current[nextIndex];
 
     setCurrentSlide(nextIndex);
-    nextSlide?.scrollIntoView({ behavior, block: "nearest", inline: "center" });
+
+    if (nextSlide) {
+      nextSlide.scrollIntoView({
+        behavior,
+        block: "nearest",
+        inline: "center",
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -73,6 +82,15 @@ export function EventSlide() {
     };
   }, []);
 
+  const navigate = useNavigate();
+
+  const handleCardClick = (eventTitle: string) => {
+    const slug = slugify(eventTitle);
+    navigate({
+      to: "/events/$eventId",
+      params: { eventId: slug },
+    });
+  };
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-black text-white">
@@ -97,40 +115,7 @@ export function EventSlide() {
       </div>
 
       <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-5 py-6 sm:px-8 lg:px-10">
-        {/* <header className="flex items-center justify-between py-2">
-          <div>
-            <p className="text-xs uppercase tracking-[0.45em] text-white/65">Live event platform</p>
-            <h1 className="text-3xl font-black tracking-[0.28em] sm:text-4xl">PULSE</h1>
-          </div>
-          <button className="rounded-full border border-white/20 px-4 py-2 text-sm text-white/85 transition hover:border-white/40 hover:text-white">
-            Browse all events
-          </button>
-        </header> */}
-
         <section className="flex flex-1 flex-col justify-between gap-10 pb-6 pt-24 sm:pt-28 lg:pt-32">
-          {/* <div className="max-w-2xl space-y-6">
-            <p className="text-sm font-medium uppercase tracking-[0.3em] text-white/70">TanStack Start style web conversion</p>
-            <div className="space-y-4">
-              <h2 className="text-5xl font-black tracking-tight sm:text-7xl lg:text-8xl">{activeSlide.title}</h2>
-              <p className="max-w-xl text-lg text-white/82 sm:text-xl">{activeSlide.subtitle}. A web-first remake of your React Native slider with autoplay, snap scrolling, responsive scaling, and image-driven hero transitions.</p>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-white/78 sm:text-base">
-              <span>{activeSlide.date}</span>
-              <span>{activeSlide.time}</span>
-              <span>{activeSlide.artists}</span>
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-white/90">
-                Get tickets
-              </button>
-              <button className="rounded-full border border-white/22 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/45 hover:bg-white/8">
-                View lineup
-              </button>
-            </div>
-          </div> */}
-
           <div
             className="space-y-5"
           >
@@ -163,7 +148,7 @@ export function EventSlide() {
               className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 [scrollbar-width:none]"
               style={{ msOverflowStyle: "none" }}
             >
-              {eventSlides.map((slide, index) => {
+              {allEvents.map((slide, index) => {
                 const isActive = index === currentSlide;
 
                 return (
@@ -173,19 +158,19 @@ export function EventSlide() {
                       slideRefs.current[index] = element;
                     }}
                     type="button"
-                    onClick={() => goToSlide(index)}
+                    onClick={() => handleCardClick(slide.title)}
                     className={`group relative min-h-[22rem] min-w-[86%] snap-center overflow-hidden rounded-[2rem] text-left transition duration-500 sm:min-w-[36rem] lg:min-w-[42rem] ${isActive
                       ? "scale-100 opacity-100"
                       : "scale-[0.94] opacity-65 hover:scale-[0.97] hover:opacity-90"
                       }`}
                   >
-                    <img src={slide.image} alt={slide.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-                    <div
+                    <img src={slide.coverImage} alt={slide.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+                    {/* <div
                       className="absolute inset-0"
                       style={{
                         background: `linear-gradient(180deg, rgba(15,23,42,0.06) 0%, ${slide.gradient[1]} 48%, rgba(2,6,23,0.94) 100%)`,
                       }}
-                    />
+                    /> */}
                     <div className="absolute inset-0 bg-black/20" />
                     <div className="w-fit p-5 absolute top-0 left-0 right-0 z-10 pointer-events-none">
                       <div className="bg-orange-500 rounded-full px-4 py-2 shadow-lg">
@@ -199,11 +184,11 @@ export function EventSlide() {
 
                       <div className="space-y-3">
                         <h3 className="text-3xl font-black sm:text-4xl">{slide.title}</h3>
-                        <p className="max-w-md text-base text-white/82 sm:text-lg">{slide.subtitle}</p>
+                        {/* <p className="max-w-md text-base text-white/82 sm:text-lg">{slide.subtitle}</p> */}
                         <span className="text-xs uppercase tracking-[0.25em] text-white/70">
                           {slide.date} • {slide.time}
                         </span>
-                        <p className="text-sm uppercase tracking-[0.22em] text-white/68">{slide.artists}</p>
+                        {/* <p className="text-sm uppercase tracking-[0.22em] text-white/68">{slide.artists}</p> */}
                       </div>
                     </div>
                     <button

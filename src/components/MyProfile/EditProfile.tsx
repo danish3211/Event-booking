@@ -42,6 +42,38 @@ export function EditProfile() {
     const artistTypes = ["Singer", "Guitarist", "Pianist", "Drummer", "DJ", "Band", "Dancer", "Comedian", "Magician", "Anchor", "Speaker"];
     const genres = ["Bollywood", "Classical", "Folk", "Rock", "Pop", "Jazz", "Electronic", "Hip Hop", "Devotional", "Regional"];
 
+    function SwitchRow({
+        title,
+        description,
+        checked,
+        onChange,
+    }: {
+        title: string;
+        description: string;
+        checked: boolean;
+        onChange: (next: boolean) => void;
+    }) {
+        return (
+            <div className="flex items-center justify-between gap-4 py-3">
+                <div>
+                    <p className="text-[30px] leading-tight font-semibold text-background sm:text-xl">{title}</p>
+                    <p className="text-[26px] leading-tight text-zinc-600 sm:text-lg">{description}</p>
+                </div>
+                <button
+                    type="button"
+                    role="switch"
+                    aria-checked={checked}
+                    onClick={() => onChange(!checked)}
+                    className={`relative h-8 w-14 rounded-full transition ${checked ? "bg-violet-600" : "bg-zinc-300"}`}
+                >
+                    <span
+                        className={`absolute top-1 h-6 w-6 rounded-full bg-white shadow transition ${checked ? "left-7" : "left-1"}`}
+                    />
+                </button>
+            </div>
+        );
+    }
+
     return (
         <div>
             <div>
@@ -155,7 +187,90 @@ export function EditProfile() {
                     )}
 
                     {/* SETTINGS TAB */}
-                   
+                    {activeTab === "settings" && (
+                        <div className="space-y-6">
+                            <section>
+                                <h2 className="mb-3 text-[38px] leading-tight font-bold text-background sm:text-3xl">Privacy Settings</h2>
+                                <div className="rounded-3xl border border-zinc-300 px-5 py-3 shadow-sm">
+                                    <SwitchRow
+                                        title="Public Profile"
+                                        description="Make your profile visible to everyone"
+                                        checked={profileData.settings.isProfilePublic}
+                                        onChange={(value) =>
+                                            setProfileData((prev) => ({
+                                                ...prev,
+                                                settings: { ...prev.settings, isProfilePublic: value },
+                                            }))
+                                        }
+                                    />
+                                    <SwitchRow
+                                        title="Direct Bookings"
+                                        description="Allow clients to book you directly"
+                                        checked={profileData.settings.allowDirectBookings}
+                                        onChange={(value) =>
+                                            setProfileData((prev) => ({
+                                                ...prev,
+                                                settings: { ...prev.settings, allowDirectBookings: value },
+                                            }))
+                                        }
+                                    />
+                                    <SwitchRow
+                                        title="Show Location"
+                                        description="Display your city on profile"
+                                        checked={profileData.settings.showLocation}
+                                        onChange={(value) =>
+                                            setProfileData((prev) => ({
+                                                ...prev,
+                                                settings: { ...prev.settings, showLocation: value },
+                                            }))
+                                        }
+                                    />
+                                </div>
+                            </section>
+
+                            <section>
+                                <h2 className="mb-3 text-[38px] leading-tight font-bold text-background sm:text-3xl">Notification Settings</h2>
+                                <div className="rounded-3xl border border-zinc-300 px-5 py-3 shadow-sm">
+                                    <SwitchRow
+                                        title="Email Notifications"
+                                        description="Receive booking updates via email"
+                                        checked={profileData.settings.emailNotifications}
+                                        onChange={(value) =>
+                                            setProfileData((prev) => ({
+                                                ...prev,
+                                                settings: { ...prev.settings, emailNotifications: value },
+                                            }))
+                                        }
+                                    />
+                                    <SwitchRow
+                                        title="Push Notifications"
+                                        description="Get instant alerts on your phone"
+                                        checked={profileData.settings.pushNotifications}
+                                        onChange={(value) =>
+                                            setProfileData((prev) => ({
+                                                ...prev,
+                                                settings: { ...prev.settings, pushNotifications: value },
+                                            }))
+                                        }
+                                    />
+                                </div>
+                            </section>
+
+                            <section className="rounded-3xl border border-red-500 bg-red-500/10 p-5">
+                                <h3 className="mb-2 text-[34px] leading-tight font-semibold text-red-700 sm:text-2xl">Delete Account</h3>
+                                <p className="mb-4 text-[26px] leading-tight text-red-600 sm:text-lg">
+                                    Permanently delete your account and all data. This action cannot be undone.
+                                </p>
+                                <button
+                                    type="button"
+                                    onClick={() => window.alert("Account deletion flow goes here")}
+                                    className="w-full rounded-2xl bg-red-600 px-6 py-3 text-[30px] font-semibold text-white transition hover:bg-red-700 sm:text-xl"
+                                >
+                                    Delete Account
+                                </button>
+                            </section>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

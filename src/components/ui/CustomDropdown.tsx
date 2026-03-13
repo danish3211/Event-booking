@@ -30,10 +30,10 @@ export const CustomDropdown = ({
       {/* Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 shadow-sm transition-all hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary/10"
+        className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/20 px-5 py-2.5 text-sm font-medium text-background shadow-sm transition-all hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary/10"
       >
         {selected === options[0] ? label : selected}
-        <ChevronDown className={`h-4 w-4 text-slate-500 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`h-4 w-4 text-background transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {/* Menu Items (Dropdown) */}

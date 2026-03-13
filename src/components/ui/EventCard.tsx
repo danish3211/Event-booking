@@ -1,5 +1,6 @@
 import type { IEvent } from "@/interfaces/Event.interface";
-import { formatDateInput } from "@/lib/utils";
+import { formatDateInput, slugify } from "@/lib/utils";
+import { useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
   Bookmark,
@@ -16,13 +17,23 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
+ const navigate = useNavigate();
   const [isBookmarked, setIsBookmarked] = useState(event.isBookmarked);
   const [showTicketModal, setShowTicketModal] = useState(false);
+
+const handleCardClick = () => {
+  const slug = slugify(event.title);
+    navigate({
+      to: "/events/$eventId",
+      params: { eventId: slug },
+    });
+  };
 
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
+      onClick={handleCardClick}
       className="group relative flex flex-col overflow-hidden rounded-3xl bg-[#141414] border border-white/10 shadow-xl transition-colors hover:border-[#8A3FFC]/50"
     >
       {/* Image Section */}

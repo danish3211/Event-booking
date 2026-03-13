@@ -53,3 +53,13 @@ export const formatDateInput = (input: string): string => {
     return `${cleaned.slice(0, 2)}/${cleaned.slice(2, 4)}/${cleaned.slice(4, 8)}`;
   }
 };
+
+export const slugify = (text: string) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')     // Replace spaces with -
+    .replace(/[^\w-]+/g, '')   // Remove all non-word chars
+    .replace(/--+/g, '-');    // Replace multiple - with single -
+};

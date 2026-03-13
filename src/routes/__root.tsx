@@ -1,9 +1,10 @@
 import { HeadContent, Scripts, createRootRoute, useRouterState } from '@tanstack/react-router'
 
-import Header from '../components/Header'
+
 
 import appCss from '../styles.css?url'
-import Footer from '@/components/Footer'
+import Footer from '@/components/common/Footer'
+import Header from '@/components/common/Header'
 
 export const Route = createRootRoute({
   head: () => ({

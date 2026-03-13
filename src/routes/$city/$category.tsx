@@ -4,7 +4,7 @@ import { CustomDropdown } from "@/components/ui/CustomDropdown";
 import EventCard from "@/components/ui/EventCard";
 import { TourDatesTable } from "@/components/ui/TourDatesTable";
 import { Wrapper } from "@/components/ui/Wrapper";
-import { CATEGORY_CONFIG, CATEGORIES, EVENTS, attendees, date, price, tourDates } from "@/constants";
+import { CATEGORY_CONFIG, CATEGORIES, attendees, date, price, tourDates, allEvents } from "@/constants";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/$city/$category")({
@@ -97,7 +97,7 @@ function CategoryPage() {
         </div>
       </div>
       <div className="mt-6 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center py-10">
-        <p className="text-3xl font-medium tracking-tight text-text">
+        <p className="text-3xl font-medium tracking-tight text-background">
           {data.title}
           &nbsp;  in {city.charAt(0).toUpperCase() + city.slice(1)}
         </p>
@@ -113,7 +113,7 @@ function CategoryPage() {
         </div>
       </div>
       <div className="grid md:grid-cols-4 gap-6">
-        {EVENTS.map((event) => (
+        {allEvents.map((event) => (
           <EventCard event={event} key={event.id} />
         ))}
       </div>

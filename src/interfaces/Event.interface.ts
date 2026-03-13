@@ -14,6 +14,7 @@ export interface IEvent {
   date: string;
   time: string;
   venue: string;
+  description?: string;
   location: string;
   coverImage: string;
   priceRange: {
