@@ -63,3 +63,14 @@ export const slugify = (text: string) => {
     .replace(/[^\w-]+/g, '')   // Remove all non-word chars
     .replace(/--+/g, '-');    // Replace multiple - with single -
 };
+
+
+// Find event by slug - this is the key fix!
+export function findEventBySlug(events: any[], slug: string) {
+  return events.find(event => slugify(event.title) === slug);
+}
+
+// Find venue by slug
+export function findVenueBySlug(venues: any[], slug: string) {
+  return venues.find(venue => slugify(venue.name) === slug);
+}

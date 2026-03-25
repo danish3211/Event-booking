@@ -18,11 +18,11 @@ export function EventSlide() {
 
     setCurrentSlide(nextIndex);
 
-    if (nextSlide) {
-      nextSlide.scrollIntoView({
+    if (nextSlide && viewportRef.current) {
+      const viewport = viewportRef.current;
+      viewport.scrollTo({
+        left: nextSlide.offsetLeft - viewport.clientWidth / 2 + nextSlide.clientWidth / 2,
         behavior,
-        block: "nearest",
-        inline: "center",
       });
     }
   }, []);
@@ -145,7 +145,7 @@ export function EventSlide() {
             <div
               ref={viewportRef}
               onScroll={handleScroll}
-              className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 [scrollbar-width:none]"
+              className="relative flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 [scrollbar-width:none]"
               style={{ msOverflowStyle: "none" }}
             >
               {allEvents.map((slide, index) => {

@@ -1,4 +1,4 @@
-import type { IEvent } from "./interfaces/Event.interface";
+import type { IEvent, IVenue } from "./interfaces/Event.interface";
 
 export interface Category {
     name: string;
@@ -564,3 +564,379 @@ export const FAQ_DATA: FAQ[] = [
   ];
   
   
+  export const allVenues: IVenue[] = [
+  {
+    id: "1",
+    name: "Phoenix MarketCity",
+    description: "One of Mumbai's premier shopping and entertainment destinations, featuring world-class event spaces, state-of-the-art sound systems, and premium amenities. Perfect for concerts, exhibitions, and corporate events.",
+    address: "LBS Road, Kurla West, Mumbai, Maharashtra 400070",
+    latitude: 19.0865,
+    longitude: 72.8889,
+    venue_images: [
+      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=500&fit=crop"
+    ],
+    keywords: ["Shopping Mall", "Concert Venue", "Event Space", "Premium", "Central Location"],
+    created_by: 1,
+    created_at: "2024-01-01T00:00:00Z",
+    updated_by: 1,
+    updated_at: "2024-01-01T00:00:00Z",
+    deleted_at: null,
+    deleted_by: null,
+    is_deleted: false,
+    status: "Active",
+    rating: 4.5,
+    reviewCount: 128,
+    upcomingEvents: 12,
+    spaces: [
+      {
+        id: "1",
+        venue_id: "1",
+        space_name: "Grand Arena",
+        capacity: 5000,
+        max_capacity: 5500,
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      },
+      {
+        id: "2",
+        venue_id: "1",
+        space_name: "Intimate Hall",
+        capacity: 500,
+        max_capacity: 600,
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      }
+    ],
+    policies: [
+      {
+        id: "1",
+        venue_id: "1",
+        key: "Parking",
+        value: "Free valet parking available for up to 4 hours",
+        icon: "Car",
+        content_type: "Other Info",
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      },
+      {
+        id: "2",
+        venue_id: "1",
+        key: "Age Restriction",
+        value: "18+ for entry without guardian",
+        icon: "UserCheck",
+        content_type: "Policy",
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      },
+      {
+        id: "3",
+        venue_id: "1",
+        key: "Food & Beverages",
+        value: "Multiple dining options available within the venue",
+        icon: "Utensils",
+        content_type: "Other Info",
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      }
+    ]
+  },
+  {
+    id: "2",
+    name: "Blue Note Jazz Club",
+    description: "An intimate jazz venue featuring exceptional acoustics, elegant décor, and an atmosphere perfect for live music performances. Home to the finest jazz musicians and a sophisticated audience.",
+    address: "Bandra West, Mumbai, Maharashtra 400050",
+    latitude: 19.0544,
+    longitude: 72.8402,
+    venue_images: [
+      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1574391884720-bbc3740c59d1?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?w=800&h=500&fit=crop"
+    ],
+    keywords: ["Jazz Club", "Live Music", "Intimate", "Acoustic", "Premium"],
+    created_by: 1,
+    created_at: "2024-01-01T00:00:00Z",
+    updated_by: 1,
+    updated_at: "2024-01-01T00:00:00Z",
+    deleted_at: null,
+    deleted_by: null,
+    is_deleted: false,
+    status: "Active",
+    rating: 4.8,
+    reviewCount: 256,
+    upcomingEvents: 8,
+    spaces: [
+      {
+        id: "3",
+        venue_id: "2",
+        space_name: "Main Stage",
+        capacity: 300,
+        max_capacity: 350,
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      },
+      {
+        id: "4",
+        venue_id: "2",
+        space_name: "VIP Lounge",
+        capacity: 80,
+        max_capacity: 100,
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      }
+    ],
+    policies: [
+      {
+        id: "4",
+        venue_id: "2",
+        key: "Dress Code",
+        value: "Smart casual required. No shorts or flip-flops",
+        icon: "Shirt",
+        content_type: "Policy",
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      },
+      {
+        id: "5",
+        venue_id: "2",
+        key: "Minimum Spend",
+        value: "₹1,500 per person for table reservations",
+        icon: "Wallet",
+        content_type: "Policy",
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      }
+    ]
+  },
+  {
+    id: "3",
+    name: "Mahalaxmi Race Course",
+    description: "A historic and expansive outdoor venue offering breathtaking open spaces perfect for large-scale festivals, concerts, and outdoor events. Features lush green surroundings and iconic Mumbai skyline views.",
+    address: "Mahalaxmi, Mumbai, Maharashtra 400034",
+    latitude: 18.9827,
+    longitude: 72.8191,
+    venue_images: [
+      "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&h=500&fit=crop"
+    ],
+    keywords: ["Outdoor", "Festival Ground", "Historic", "Large Capacity", "Scenic"],
+    created_by: 1,
+    created_at: "2024-01-01T00:00:00Z",
+    updated_by: 1,
+    updated_at: "2024-01-01T00:00:00Z",
+    deleted_at: null,
+    deleted_by: null,
+    is_deleted: false,
+    status: "Active",
+    rating: 4.6,
+    reviewCount: 189,
+    upcomingEvents: 5,
+    spaces: [
+      {
+        id: "5",
+        venue_id: "3",
+        space_name: "Main Ground",
+        capacity: 15000,
+        max_capacity: 20000,
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      },
+      {
+        id: "6",
+        venue_id: "3",
+        space_name: "Pavilion Area",
+        capacity: 3000,
+        max_capacity: 3500,
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      }
+    ],
+    policies: [
+      {
+        id: "6",
+        venue_id: "3",
+        key: "Weather Policy",
+        value: "Events continue in light rain. Full refund for cancellation due to severe weather",
+        icon: "CloudRain",
+        content_type: "Policy",
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      },
+      {
+        id: "7",
+        venue_id: "3",
+        key: "Accessibility",
+        value: "Wheelchair accessible with designated viewing areas",
+        icon: "Accessibility",
+        content_type: "Other Info",
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      }
+    ]
+  },
+  {
+    id: "4",
+    name: "Phoenix Arena",
+    description: "A modern indoor arena designed for world-class performances. Features cutting-edge lighting, superior acoustics, and flexible seating configurations for various event types.",
+    address: "Lower Parel, Mumbai, Maharashtra 400013",
+    latitude: 19.0040,
+    longitude: 72.8265,
+    venue_images: [
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&h=500&fit=crop"
+    ],
+    keywords: ["Indoor Arena", "Concert Hall", "Modern", "Flexible Seating", "Central"],
+    created_by: 1,
+    created_at: "2024-01-01T00:00:00Z",
+    updated_by: 1,
+    updated_at: "2024-01-01T00:00:00Z",
+    deleted_at: null,
+    deleted_by: null,
+    is_deleted: false,
+    status: "Active",
+    rating: 4.4,
+    reviewCount: 312,
+    upcomingEvents: 15,
+    spaces: [
+      {
+        id: "7",
+        venue_id: "4",
+        space_name: "Main Arena",
+        capacity: 8000,
+        max_capacity: 8500,
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      },
+      {
+        id: "8",
+        venue_id: "4",
+        space_name: "Club Section",
+        capacity: 1200,
+        max_capacity: 1500,
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      }
+    ],
+    policies: [
+      {
+        id: "8",
+        venue_id: "4",
+        key: "Security Check",
+        value: "Mandatory bag check at entry. Prohibited items will be confiscated",
+        icon: "Shield",
+        content_type: "Policy",
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      },
+      {
+        id: "9",
+        venue_id: "4",
+        key: "Public Transport",
+        value: "Easily accessible via Lower Parel station (Western Railway)",
+        icon: "Train",
+        content_type: "Other Info",
+        created_by: 1,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_by: 1,
+        updated_at: "2024-01-01T00:00:00Z",
+        deleted_at: null,
+        deleted_by: null,
+        is_deleted: false
+      }
+    ]
+  }
+];
+
+export const venueAmenities = [
+  { id: 1, name: "Parking", icon: "Car" },
+  { id: 2, name: "Food Court", icon: "Utensils" },
+  { id: 3, name: "WiFi", icon: "Wifi" },
+  { id: 4, name: "Bar", icon: "Wine" },
+  { id: 5, name: "Air Conditioning", icon: "Wind" },
+  { id: 6, name: "Restrooms", icon: "Bath" },
+  { id: 7, name: "Security", icon: "Shield" },
+  { id: 8, name: "Wheelchair Access", icon: "Accessibility" }
+];
