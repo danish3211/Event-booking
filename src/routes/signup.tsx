@@ -32,11 +32,11 @@ function LoginPage() {
               <img src="https://www.svgrepo.com/show/475656/google-color.svg" className="h-6 w-6" alt="Google" />
               Continue with Google
             </button>
-
+{/* 
             <button className="flex w-full items-center justify-center gap-3 rounded-2xl bg-[#2D2344] py-4 text-lg font-semibold text-white transition-all hover:bg-[#3d3158] active:scale-[0.98]">
               <img src="https://www.svgrepo.com/show/475647/facebook-color.svg" className="h-6 w-6" alt="Facebook" />
               Continue with Facebook
-            </button>
+            </button> */}
           </div>
 
 

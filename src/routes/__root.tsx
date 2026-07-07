@@ -1,4 +1,6 @@
 import { HeadContent, Scripts, createRootRoute, useRouterState } from '@tanstack/react-router'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from '@/lib/query'
 
 
 
@@ -37,16 +39,18 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   const isSignupPage = state.location.pathname === '/signup'
 
   return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {!isSignupPage && <Header />}
-        {children}
-        <Scripts />
-        {!isSignupPage && <Footer />}
-      </body>
-    </html>
+    <QueryClientProvider client={queryClient}>
+      <html lang="en">
+        <head>
+          <HeadContent />
+        </head>
+        <body>
+          {!isSignupPage && <Header />}
+          {children}
+          <Scripts />
+          {!isSignupPage && <Footer />}
+        </body>
+      </html>
+    </QueryClientProvider>
   )
 }

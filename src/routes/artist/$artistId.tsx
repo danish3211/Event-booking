@@ -6,7 +6,7 @@ import Button from '@/components/ui/Button';
 import { ARTISTS } from '@/constants';
 import { TourDatesTable } from '@/components/ui/TourDatesTable';
 
-export const Route = createFileRoute('/$artist/$artistId')({
+export const Route = createFileRoute('/artist/$artistId')({
     component: ArtistProfile,
 });
 
