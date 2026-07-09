@@ -1,278 +1,202 @@
-import { useState } from 'react';
-import { User, Music, Settings, Camera, ArrowLeft } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { useState, useEffect, useRef } from 'react';
+import { Camera, Check } from 'lucide-react';
 
 export function EditProfile() {
-    const [activeTab, setActiveTab] = useState<'personal' | 'artist' | 'settings'>('personal');
-    const [profileData, setProfileData] = useState({
-        personalInfo: {
-            firstName: "John",
-            lastName: "Doe",
-            email: "john.doe@example.com",
-            phone: "+91 98765 43210",
-            bio: "Passionate musician with 8 years of experience in Bollywood and Classical music. Love performing at weddings and corporate events.",
-            location: "Mumbai, Maharashtra",
-            website: "www.johndoemusic.com",
-            profileImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&h=200&auto=format&fit=crop",
-        },
-        artistInfo: {
-            artistName: "John Doe Music",
-            artistTypes: ["Singer", "Guitarist"],
-            genres: ["Bollywood", "Classical", "Folk"],
-            experience: "8",
-            minimumBudget: "25000",
-            equipment: ["Acoustic Guitar", "Microphone", "Amplifier"],
-            specialization: "Wedding ceremonies, Corporate events, Cultural programs",
-        },
-        settings: {
-            isProfilePublic: true,
-            allowDirectBookings: true,
-            showLocation: true,
-            emailNotifications: true,
-            pushNotifications: false,
-        },
+    const [profile, setProfile] = useState({
+        name: 'Danish Sheikh',
+        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=guest',
+        bio: 'Entertainment Seeker',
+        location: 'Mumbai',
+        website: 'https://danishsheikh.dev',
+        phone: '+91 98765 43210',
+        dob: '1998-05-15'
     });
 
-    const tabs = [
-        { id: 'personal', label: 'Personal', icon: User },
-        { id: 'artist', label: 'Artist Info', icon: Music },
-        { id: 'settings', label: 'Settings', icon: Settings },
-    ] as const;
+    const [isSaved, setIsSaved] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const artistTypes = ["Singer", "Guitarist", "Pianist", "Drummer", "DJ", "Band", "Dancer", "Comedian", "Magician", "Anchor", "Speaker"];
-    const genres = ["Bollywood", "Classical", "Folk", "Rock", "Pop", "Jazz", "Electronic", "Hip Hop", "Devotional", "Regional"];
+    // Sync state from localStorage on mount
+    useEffect(() => {
+        const savedUser = localStorage.getItem('user');
+        if (savedUser) {
+            const parsed = JSON.parse(savedUser);
+            setProfile({
+                name: parsed.name || 'Danish Sheikh',
+                avatar: parsed.avatar || 'https://api.dicebear.com/7.x/avataaars/svg?seed=guest',
+                bio: parsed.bio || '',
+                location: parsed.location || 'Mumbai',
+                website: parsed.website || '',
+                phone: parsed.phone || '',
+                dob: parsed.dob || ''
+            });
+        }
+    }, []);
 
-    function SwitchRow({
-        title,
-        description,
-        checked,
-        onChange,
-    }: {
-        title: string;
-        description: string;
-        checked: boolean;
-        onChange: (next: boolean) => void;
-    }) {
-        return (
-            <div className="flex items-center justify-between gap-4 py-3">
-                <div>
-                    <p className="text-[30px] leading-tight font-semibold text-background sm:text-xl">{title}</p>
-                    <p className="text-[26px] leading-tight text-zinc-600 sm:text-lg">{description}</p>
-                </div>
-                <button
-                    type="button"
-                    role="switch"
-                    aria-checked={checked}
-                    onClick={() => onChange(!checked)}
-                    className={`relative h-8 w-14 rounded-full transition ${checked ? "bg-violet-600" : "bg-zinc-300"}`}
-                >
-                    <span
-                        className={`absolute top-1 h-6 w-6 rounded-full bg-white shadow transition ${checked ? "left-7" : "left-1"}`}
-                    />
-                </button>
-            </div>
-        );
-    }
+    const handleChange = (field: keyof typeof profile, value: string) => {
+        setProfile(prev => ({
+            ...prev,
+            [field]: value
+        }));
+    };
+
+    const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                if (event.target?.result) {
+                    handleChange('avatar', event.target.result as string);
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleSave = (e: React.FormEvent) => {
+        e.preventDefault();
+        localStorage.setItem('user', JSON.stringify({
+            name: profile.name,
+            avatar: profile.avatar,
+            location: profile.location,
+            bio: profile.bio,
+            website: profile.website,
+            phone: profile.phone,
+            dob: profile.dob
+        }));
+        
+        // Notify other components (Header, Profile page) of the storage update
+        window.dispatchEvent(new Event('storage'));
+        
+        setIsSaved(true);
+        setTimeout(() => {
+            setIsSaved(false);
+            window.location.reload();
+        }, 1200);
+    };
 
     return (
-        <div>
+        <form onSubmit={handleSave} className="space-y-5 text-white">
+            {/* Hidden avatar input */}
+            <input 
+                type="file" 
+                ref={fileInputRef} 
+                onChange={handleAvatarChange} 
+                accept="image/*" 
+                className="hidden" 
+            />
+
+            {/* 1. Change Image */}
+            <div className="flex flex-col items-center pb-2">
+                <div className="relative group cursor-pointer" onClick={() => fileInputRef.current?.click()}>
+                    <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-white/20 p-[3px] bg-black/40 shadow-xl transition-all group-hover:border-primary">
+                        <img 
+                            src={profile.avatar} 
+                            alt="Avatar Preview" 
+                            className="w-full h-full object-cover rounded-full" 
+                        />
+                    </div>
+                    <div className="absolute inset-0 bg-black/50 rounded-full opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                        <Camera size={18} className="text-white" />
+                    </div>
+                </div>
+                <button 
+                    type="button" 
+                    onClick={() => fileInputRef.current?.click()} 
+                    className="text-primary hover:text-vivid text-xs font-semibold mt-2.5 transition-colors"
+                >
+                    Change Photo
+                </button>
+            </div>
+
+            {/* 2. Full Name */}
             <div>
-                {/* Header */}
-                <div className="flex items-center justify-end">
-                    {/* <button className="p-2 hover:bg-gray-100 rounded-full text-purple-600">
-            <ArrowLeft size={24} />
-          </button>
-          <h1 className="text-xl font-bold text-gray-900">Edit Profile</h1> */}
-                    <button className="text-purple-600 font-semibold hover:text-purple-700">Save</button>
+                <label className="block text-xs font-semibold text-white/60 mb-2">Full Name</label>
+                <input 
+                    type="text" 
+                    required 
+                    value={profile.name} 
+                    onChange={e => handleChange('name', e.target.value)}
+                    placeholder="Enter your full name" 
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white outline-none focus:ring-1 focus:ring-primary text-sm transition-all"
+                />
+            </div>
+
+            {/* 3. Bio */}
+            <div>
+                <label className="block text-xs font-semibold text-white/60 mb-2">Bio</label>
+                <textarea 
+                    value={profile.bio} 
+                    onChange={e => handleChange('bio', e.target.value)}
+                    placeholder="Tell us about yourself..." 
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white outline-none focus:ring-1 focus:ring-primary text-sm transition-all h-20 resize-none"
+                />
+            </div>
+
+            {/* Grid for two-column items */}
+            <div className="grid grid-cols-2 gap-4">
+                {/* 4. Location */}
+                <div>
+                    <label className="block text-xs font-semibold text-white/60 mb-2">Location</label>
+                    <input 
+                        type="text" 
+                        value={profile.location} 
+                        onChange={e => handleChange('location', e.target.value)}
+                        placeholder="City, Country" 
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white outline-none focus:ring-1 focus:ring-primary text-sm transition-all"
+                    />
                 </div>
 
-                {/* Tabs */}
-                <div className="flex border-b border-gray-100">
-                    {tabs.map((tab) => {
-                        const Icon = tab.icon;
-                        return (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id)}
-                                className={cn(
-                                    "flex-1 flex flex-col items-center py-4 border-b transition-colors",
-                                    activeTab === tab.id ? "border-purple-600 text-purple-600 border-b-2" : "border-transparent text-white hover:text-gray-600"
-                                )}
-                            >
-                                <Icon size={20} />
-                                <span className="text-sm font-medium mt-1">{tab.label}</span>
-                            </button>
-                        );
-                    })}
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                    {activeTab === 'personal' && (
-                        <div className="space-y-4">
-                            <div className="flex flex-col items-center mb-6">
-                                <div className="relative">
-                                    <img src={profileData.personalInfo.profileImage} className="w-24 h-24 rounded-full object-cover" alt="Profile" />
-                                    <button className="absolute bottom-0 right-0 bg-purple-600 rounded-full p-2 text-white border-2 border-white">
-                                        <Camera size={16} />
-                                    </button>
-                                </div>
-                                <span className="text-purple-600 font-medium mt-2">Change Photo</span>
-                            </div>
-
-                            {[
-                                { label: 'First Name', key: 'firstName' },
-                                { label: 'Last Name', key: 'lastName' },
-                                { label: 'Email', key: 'email' },
-                                { label: 'Phone Number', key: 'phone' },
-                            ].map(field => (
-                                <div key={field.key}>
-                                    <label className="block text-sm font-semibold text-white mb-1">{field.label} *</label>
-                                    <input type="text" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-100 focus:border-purple-600 outline-none text-white" value={profileData.personalInfo[field.key as keyof typeof profileData.personalInfo]} onChange={e => setProfileData({ ...profileData, personalInfo: { ...profileData.personalInfo, [field.key]: e.target.value } })} />
-                                </div>
-                            ))}
-
-                            <div>
-                                <label className="block text-sm font-semibold text-white mb-1">Bio</label>
-                                <textarea className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-100 focus:border-purple-600 outline-none h-24 text-white" value={profileData.personalInfo.bio} onChange={e => setProfileData({ ...profileData, personalInfo: { ...profileData.personalInfo, bio: e.target.value } })} />
-                            </div>
-                        </div>
-                    )}
-
-                    {activeTab === 'artist' && (
-                        <div className="space-y-4">
-                            <div>
-                                <label className="block text-sm font-semibold text-white mb-1">Artist/Band Name *</label>
-                                <input type="text" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-100 focus:border-purple-600 outline-none text-white" value={profileData.artistInfo.artistName} onChange={e => setProfileData({ ...profileData, artistInfo: { ...profileData.artistInfo, artistName: e.target.value } })} />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-semibold text-white mb-2">Artist Type *</label>
-                                <div className="flex flex-wrap gap-2">
-                                    {artistTypes.map(type => (
-                                        <button key={type} className={cn("px-4 py-2 rounded-full text-sm font-medium border", profileData.artistInfo.artistTypes.includes(type) ? "bg-purple-600 text-white border-purple-600" : "bg-white text-gray-700 border-gray-200")}>
-                                            {type}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-semibold text-white mb-2">Genres *</label>
-                                <div className="flex flex-wrap gap-2">
-                                    {genres.map(genre => (
-                                        <button key={genre} className={cn("px-4 py-2 rounded-full text-sm font-medium border", profileData.artistInfo.genres.includes(genre) ? "bg-purple-600 text-white border-purple-600" : "bg-white text-gray-700 border-gray-200")}>
-                                            {genre}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-semibold text-white mb-1">Years of experience *</label>
-                                <input type="text" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-100 focus:border-purple-600 outline-none text-white" value={profileData.artistInfo.experience} onChange={e => setProfileData({ ...profileData, artistInfo: { ...profileData.artistInfo, experience: e.target.value } })} />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-semibold text-white mb-1">Minimum Budget (₹) *</label>
-                                <input type="text" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-100 focus:border-purple-600 outline-none text-white" value={profileData.artistInfo.minimumBudget} onChange={e => setProfileData({ ...profileData, artistInfo: { ...profileData.artistInfo, minimumBudget: e.target.value } })} />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-semibold text-white mb-1">Specialization </label>
-                                <textarea className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-100 focus:border-purple-600 outline-none h-24 text-white" value={profileData.artistInfo.specialization} onChange={e => setProfileData({ ...profileData, artistInfo: { ...profileData.artistInfo, specialization: e.target.value } })} />
-                            </div>
-
-                        </div>
-                    )}
-
-                    {/* SETTINGS TAB */}
-                    {activeTab === "settings" && (
-                        <div className="space-y-6">
-                            <section>
-                                <h2 className="mb-3 text-[38px] leading-tight font-bold text-background sm:text-3xl">Privacy Settings</h2>
-                                <div className="rounded-3xl border border-zinc-300 px-5 py-3 shadow-sm">
-                                    <SwitchRow
-                                        title="Public Profile"
-                                        description="Make your profile visible to everyone"
-                                        checked={profileData.settings.isProfilePublic}
-                                        onChange={(value) =>
-                                            setProfileData((prev) => ({
-                                                ...prev,
-                                                settings: { ...prev.settings, isProfilePublic: value },
-                                            }))
-                                        }
-                                    />
-                                    <SwitchRow
-                                        title="Direct Bookings"
-                                        description="Allow clients to book you directly"
-                                        checked={profileData.settings.allowDirectBookings}
-                                        onChange={(value) =>
-                                            setProfileData((prev) => ({
-                                                ...prev,
-                                                settings: { ...prev.settings, allowDirectBookings: value },
-                                            }))
-                                        }
-                                    />
-                                    <SwitchRow
-                                        title="Show Location"
-                                        description="Display your city on profile"
-                                        checked={profileData.settings.showLocation}
-                                        onChange={(value) =>
-                                            setProfileData((prev) => ({
-                                                ...prev,
-                                                settings: { ...prev.settings, showLocation: value },
-                                            }))
-                                        }
-                                    />
-                                </div>
-                            </section>
-
-                            <section>
-                                <h2 className="mb-3 text-[38px] leading-tight font-bold text-background sm:text-3xl">Notification Settings</h2>
-                                <div className="rounded-3xl border border-zinc-300 px-5 py-3 shadow-sm">
-                                    <SwitchRow
-                                        title="Email Notifications"
-                                        description="Receive booking updates via email"
-                                        checked={profileData.settings.emailNotifications}
-                                        onChange={(value) =>
-                                            setProfileData((prev) => ({
-                                                ...prev,
-                                                settings: { ...prev.settings, emailNotifications: value },
-                                            }))
-                                        }
-                                    />
-                                    <SwitchRow
-                                        title="Push Notifications"
-                                        description="Get instant alerts on your phone"
-                                        checked={profileData.settings.pushNotifications}
-                                        onChange={(value) =>
-                                            setProfileData((prev) => ({
-                                                ...prev,
-                                                settings: { ...prev.settings, pushNotifications: value },
-                                            }))
-                                        }
-                                    />
-                                </div>
-                            </section>
-
-                            <section className="rounded-3xl border border-red-500 bg-red-500/10 p-5">
-                                <h3 className="mb-2 text-[34px] leading-tight font-semibold text-red-700 sm:text-2xl">Delete Account</h3>
-                                <p className="mb-4 text-[26px] leading-tight text-red-600 sm:text-lg">
-                                    Permanently delete your account and all data. This action cannot be undone.
-                                </p>
-                                <button
-                                    type="button"
-                                    onClick={() => window.alert("Account deletion flow goes here")}
-                                    className="w-full rounded-2xl bg-red-600 px-6 py-3 text-[30px] font-semibold text-white transition hover:bg-red-700 sm:text-xl"
-                                >
-                                    Delete Account
-                                </button>
-                            </section>
-                        </div>
-                    )}
+                {/* 5. Website */}
+                <div>
+                    <label className="block text-xs font-semibold text-white/60 mb-2">Website</label>
+                    <input 
+                        type="text" 
+                        value={profile.website} 
+                        onChange={e => handleChange('website', e.target.value)}
+                        placeholder="https://example.com" 
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white outline-none focus:ring-1 focus:ring-primary text-sm transition-all"
+                    />
                 </div>
             </div>
-        </div>
+
+            <div className="grid grid-cols-2 gap-4">
+                {/* 6. Mobile Number */}
+                <div>
+                    <label className="block text-xs font-semibold text-white/60 mb-2">Mobile Number</label>
+                    <input 
+                        type="tel" 
+                        value={profile.phone} 
+                        onChange={e => handleChange('phone', e.target.value)}
+                        placeholder="+91 XXXXX XXXXX" 
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white outline-none focus:ring-1 focus:ring-primary text-sm transition-all"
+                    />
+                </div>
+
+                {/* 7. DOB */}
+                <div>
+                    <label className="block text-xs font-semibold text-white/60 mb-2">Date of Birth</label>
+                    <input 
+                        type="date" 
+                        value={profile.dob} 
+                        onChange={e => handleChange('dob', e.target.value)}
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white outline-none focus:ring-1 focus:ring-primary text-sm transition-all select-none"
+                    />
+                </div>
+            </div>
+
+            {/* Save Button */}
+            <button 
+                type="submit" 
+                className="w-full bg-gradient-to-r from-primary to-vivid text-white font-bold py-3.5 rounded-2xl transition-all shadow-lg active:scale-95 text-xs flex items-center justify-center gap-2 cursor-pointer mt-6"
+            >
+                {isSaved ? (
+                  <>
+                    <Check size={16} /> Saved Successfully
+                  </>
+                ) : (
+                  "Save Changes"
+                )}
+            </button>
+        </form>
     );
 }

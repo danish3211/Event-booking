@@ -173,7 +173,14 @@ export function EventSlide() {
                     /> */}
                     <div className="absolute inset-0 bg-black/20" />
                     <div className="w-fit p-5 absolute top-0 left-0 right-0 z-10 pointer-events-none">
-                      <div className="bg-orange-500 rounded-full px-4 py-2 shadow-lg">
+                      <div className="bg-black/40 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
+                      <span className="text-white text-sm font-bold">
+                      {slide.category}
+                      </span>
+                      </div>
+                    </div>
+                    <div className="w-fit p-5 absolute top-0 right-0 z-10 pointer-events-none">
+                      <div className="bg-black/40 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
                         <span className="text-white text-sm font-bold">
                           ⭐ Editor's pick
                         </span>
@@ -182,10 +189,10 @@ export function EventSlide() {
                     <div className="relative flex h-full flex-col justify-end p-6 sm:p-8">
 
 
-                      <div className="space-y-3">
+                      <div className="space-y-3 ">
                         <h3 className="text-3xl font-black sm:text-4xl">{slide.title}</h3>
                         {/* <p className="max-w-md text-base text-white/82 sm:text-lg">{slide.subtitle}</p> */}
-                        <span className="text-xs uppercase tracking-[0.25em] text-white/70">
+                        <span className="text-md font-bold bg-white/40 backdrop-blur-sm rounded-full px-4 py-1">
                           {slide.date} • {slide.time}
                         </span>
                         {/* <p className="text-sm uppercase tracking-[0.22em] text-white/68">{slide.artists}</p> */}

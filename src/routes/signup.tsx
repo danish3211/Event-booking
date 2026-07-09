@@ -1,10 +1,21 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/signup')({
   component: LoginPage,
 })
 
 function LoginPage() {
+  const navigate = useNavigate()
+
+  const handleMockLogin = () => {
+    const mockUser = {
+      name: 'Alex Johnson',
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Alex'
+    }
+    localStorage.setItem('user', JSON.stringify(mockUser))
+    navigate({ to: '/' })
+  }
+
   return (
     <div className="flex min-h-screen bg-white font-sans selection:bg-purple-100">
       <div className="relative">
@@ -28,7 +39,10 @@ function LoginPage() {
 
           {/* Social Auth Buttons */}
           <div className="space-y-4 pt-4">
-            <button className="flex w-full items-center justify-center gap-3 rounded-2xl bg-[#2D2344] py-4 text-lg font-semibold text-white transition-all hover:bg-[#3d3158] active:scale-[0.98]">
+            <button 
+              onClick={handleMockLogin}
+              className="flex w-full items-center justify-center gap-3 rounded-2xl bg-[#2D2344] py-4 text-lg font-semibold text-white transition-all hover:bg-[#3d3158] active:scale-[0.98]"
+            >
               <img src="https://www.svgrepo.com/show/475656/google-color.svg" className="h-6 w-6" alt="Google" />
               Continue with Google
             </button>
